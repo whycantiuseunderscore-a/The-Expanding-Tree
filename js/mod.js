@@ -44,6 +44,8 @@ function getPointGen() {
 	let gain = new ExpantaNum(1)
 	if (hasUpgrade("p",11)) gain = new ExpantaNum(gain).mul(2)
 	if (hasUpgrade("p",12)) gain = new ExpantaNum(gain).mul(2)
+	if (hasUpgrade("p",15)) gain = new ExpantaNum(gain).mul(new ExpantaNum(upgradeEffect("p",15)))
+	if (hasUpgrade("p",21)) gain = new ExpantaNum(gain).pow(1.25)
 	return gain
 }
 
