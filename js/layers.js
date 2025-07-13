@@ -16,6 +16,7 @@ addLayer("p", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new ExpantaNum(1)
 	if (hasUpgrade("p",13)) mult = new ExpantaNum(mult).mul(2)
+	if (hasUpgrade("p",14)) mult = new ExpantaNum(mult).mul(upgradeEffect("p",14))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -38,6 +39,28 @@ addLayer("p", {
 		description: "Double O1P gain.",
 		cost() { return new ExpantaNum(5) },
 		unlocked() { return hasUpgrade("p", 12) },
+            },
+	14: {
+		title: "A better sale",
+		description: "O1P gain is multiplied based on the number of points.",
+		cost() { return new ExpantaNum(15) },
+		unlocked() { return hasUpgrade("p", 13) },
+		effect() { return new ExpantaNum(player.points).add(1).log10().div(2.4).add(1.5) },
+		effectDisplay() { return (new ExpantaNum(upgradeEffect("p",14))) + "x" },
+            },
+	15: {
+		title: "A better sale, with points",
+		description: "Point gain is multiplied based on the number of O1Ps.",
+		cost() { return new ExpantaNum(55) },
+		unlocked() { return hasUpgrade("p", 14) },
+		effect() { return new ExpantaNum(player.p.points).add(1).log10().div(1.6).add(1.5) },
+		effectDisplay() { return (new ExpantaNum(upgradeEffect("p",15))) + "x" },
+            },
+	21: {
+		title: "Exponentiated",
+		description: "Point gain is ^1.25.",
+		cost() { return new ExpantaNum(125) },
+		unlocked() { return hasUpgrade("p", 15) },
             },
     },
     row:0, // Row the layer is in on the tree (0 is the first row)
